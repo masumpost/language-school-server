@@ -30,10 +30,18 @@ async function run() {
     await client.connect();
 
     const teachersCollection = client.db('schoolDB').collection('teachers');
-    const teachersCollection = client.db('schoolDB').collection('classes');
+    const classesCollection = client.db('schoolDB').collection('classes');
 
+    //get teachers data
     app.get('/teachers',  async(req, res) => {
         const result = await teachersCollection.find().toArray();
+        res.send(result);
+    });
+
+    //get classes data
+
+    app.get('/classes', async(req, res) => {
+        const result = await classesCollection.find().toArray();
         res.send(result);
     })
 
