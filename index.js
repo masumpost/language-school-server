@@ -78,6 +78,8 @@ app.patch('/users/admin/:id', async (req, res) => {
      role: 'admin'
     },
   };
+  const result = await usersCollection.updateOne(filter, updateDoc);
+  res.send(result);
 })
 
 //get teachers data
