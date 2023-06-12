@@ -59,8 +59,26 @@ app.post('/users', async (req, res) => {
 
   const result = await usersCollection.insertOne(user);
   res.send(result);
-})
+});
 
+//get users data
+
+app.get('/users', async (req, res) => {
+    const result = await usersCollection.find().toArray();
+    res.send(result);
+});
+
+//get users role
+
+app.patch('/users/admin/:id', async (req, res) => {
+  const id = req.params.id;
+  const filter = {_id: new ObjectId(id)};
+  const updateDoc = {
+    $set: {
+     role: 'admin'
+    },
+  };
+})
 
 //get teachers data
 app.get('/teachers', async (req, res) => {
