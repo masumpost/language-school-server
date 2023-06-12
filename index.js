@@ -50,6 +50,13 @@ const classesCollection = client.db('schoolDB').collection('classes');
 //get users data
 app.post('/users', async (req, res) => {
   const user = req.body;
+  const query = { user: user.email };
+  const existingUsers = await usersCollection.findOne(query);
+
+  if(existingUsers) {
+    return res.send({message : "User already exists"})
+  }
+
   const result = await usersCollection.insertOne(user);
   res.send(result);
 })
