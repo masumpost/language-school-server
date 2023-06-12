@@ -46,6 +46,15 @@ const usersCollection = client.db('schoolDB').collection('users');
 const teachersCollection = client.db('schoolDB').collection('teachers');
 const classesCollection = client.db('schoolDB').collection('classes');
 
+
+//get users data
+app.post('/users', async (req, res) => {
+  const user = req.body;
+  const result = await usersCollection.insertOne(user);
+  res.send(result);
+})
+
+
 //get teachers data
 app.get('/teachers', async (req, res) => {
     const result = await teachersCollection.find().toArray();
